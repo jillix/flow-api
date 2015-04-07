@@ -4,8 +4,11 @@ var EngineTools = require("../lib")
   , Logger = require("bug-killer")
   ;
 
+Logger.config.logLevel = 4;
+
 if (process.argv.indexOf("-h") > -1 || process.argv.indexOf("--help") > -1) {
-    Logger.log("Usage: engine-tools <method> <args>", "log");
+    Logger.log("Usage: engine-tools <method> <args>", "info");
+    Logger.log("Available methods: " + JSON.stringify(Object.keys(EngineTools.__proto__)), "info");
     process.exit(0);
 }
 
