@@ -9,10 +9,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": " git@github.com:jillix/editor.git engine-editor"
-  },
   "keywords": [
     "jillix",
     "engine",
@@ -23,12 +19,16 @@
   "bugs": {
     "url": "https://github.com/jillix/editor.git engine-editor/issues"
   },
-  "homepage": "https://github.com/jillix/editor.git engine-editor",
   "dependencies": {
     "bluebird": "^2.9.24",
     "bug-killer": "^1.0.0",
     "jxutils": "^0.1.8",
     "ul": "^2.1.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jillix/engine-tools.git"
+  },
+  "homepage": "https://github.com/jillix/engine-tools"
 }
