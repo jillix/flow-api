@@ -7,6 +7,11 @@ CLI tools for jillix Engine.
 $ npm install -g engine-tools
 ```
 
+## CLI Usage
+```sh
+$ engine-tools generateModuleService <optional-path-to-package.json>
+```
+
 ## Documentation
 ### `generateModuleService(path, callback)`
 Generates content for .service.json file.
