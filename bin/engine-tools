@@ -25,8 +25,7 @@ args.push(function (err, data) {
     if (err) {
         return Logger.log(err, "error");
     }
-    Logger.log("Done without errors.", "info");
-    console.log(data);
+    console.log(JSON.stringify(data, null, 4));
 });
 
 EngineTools[method].apply(EngineTools, args);
