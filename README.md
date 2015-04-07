@@ -1,5 +1,5 @@
 # Engine Tools
-CLI tools for jillix Engine.
+Engine Tools library and CLI app.
 
 ## Installation
 

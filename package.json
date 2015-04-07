@@ -1,7 +1,7 @@
 {
   "name": "engine-tools",
   "version": "1.0.0",
-  "description": "CLI tools for jillix Engine.",
+  "description": "Engine Tools library and CLI app.",
   "main": "lib/index.js",
   "bin": "./bin/engine-tools",
   "scripts": {
