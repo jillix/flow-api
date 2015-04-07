@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+var EngineTools = require("../lib")
+  , Logger = require("bug-killer")
+  ;
+
+if (process.argv.indexOf("-h") > -1 || process.argv.indexOf("--help") > -1) {
+    Logger.log("Usage: engine-tools <method> <args>", "log");
+    process.exit(0);
+}
+
+var method = process.argv[2]
+  , args = process.argv.slice(3)
+  ;
+
+if (typeof EngineTools[method] !== "function") {
+    Logger.log(method + " is not a valid method.", "error");
+    process.exit(1);
+}
+
+args.push(function (err, data) {
+    if (err) {
+        return Logger.log(err, "error");
+    }
+    Logger.log("Done without errors.", "info");
+    console.log(data);
+});
+
+EngineTools[method].apply(EngineTools, args);
