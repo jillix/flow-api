@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "CLI tools for jillix Engine.",
   "main": "lib/index.js",
+  "bin": "./bin/engine-tools",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
