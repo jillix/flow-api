@@ -1,6 +1,6 @@
 {
   "name": "engine-tools",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Engine Tools library and CLI app.",
   "main": "lib/index.js",
   "bin": {
@@ -24,5 +24,16 @@
     "type": "git",
     "url": "https://github.com/jillix/engine-tools.git"
   },
-  "homepage": "https://github.com/jillix/engine-tools"
+  "homepage": "https://github.com/jillix/engine-tools",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.24",
+    "fs-plus": "^2.7.0",
+    "jxutils": "^0.1.8",
+    "bug-killer": "^1.0.0",
+    "read-json": "^0.1.0",
+    "ul": "^2.1.0"
+  }
 }
