@@ -30,10 +30,16 @@
   },
   "dependencies": {
     "bluebird": "^2.9.24",
-    "fs-plus": "^2.7.0",
-    "jxutils": "^0.1.8",
     "bug-killer": "^1.0.0",
+    "gry": "^2.1.0",
+    "fs-plus": "^2.7.0",
+    "giturlparse": "^1.1.0",
+    "exec-limiter": "^1.0.0",
+    "jxutils": "^0.1.8",
+    "oargv": "^1.2.0",
     "read-json": "^0.1.0",
-    "ul": "^2.1.0"
+    "tmp": "^0.0.25",
+    "ul": "^2.1.0",
+    "write-json": "^0.2.0"
   }
 }
