@@ -7,7 +7,7 @@
     "engine-tools": "./bin/engine-tools"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test"
   },
   "keywords": [
     "jillix",
@@ -18,13 +18,6 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jillix/editor.git engine-editor/issues"
-  },
-  "dependencies": {
-    "bluebird": "^2.9.24",
-    "bug-killer": "^1.0.0",
-    "jxutils": "^0.1.8",
-    "ul": "^2.1.0",
-    "npm": "2.7.6"
   },
   "devDependencies": {},
   "repository": {
