@@ -23,7 +23,8 @@
     "bluebird": "^2.9.24",
     "bug-killer": "^1.0.0",
     "jxutils": "^0.1.8",
-    "ul": "^2.1.0"
+    "ul": "^2.1.0",
+    "npm": "2.7.6"
   },
   "devDependencies": {},
   "repository": {
