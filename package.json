@@ -1,6 +1,6 @@
 {
   "name": "engine-tools",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Engine Tools library and CLI app.",
   "main": "lib/index.js",
   "bin": {
@@ -45,6 +45,5 @@
     "write-json": "^0.2.0",
     "async": "0.9.0"
   },
-  "homepage": "https://github.com/jillix/engine-tools",
   "devDependencies": {}
 }
