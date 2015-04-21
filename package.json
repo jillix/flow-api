@@ -44,9 +44,6 @@
     "ul": "^2.1.0",
     "write-json": "^0.2.0"
   },
-<<<<<<< HEAD
-  "homepage": "https://github.com/jillix/engine-tools"
-=======
+  "homepage": "https://github.com/jillix/engine-tools",
   "devDependencies": {}
->>>>>>> 943f8e8179241f224cf0b12d51fa33786f98ce40
 }
