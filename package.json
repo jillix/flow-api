@@ -1,13 +1,13 @@
 {
   "name": "engine-tools",
-  "version": "1.1.0",
+  "version": "1.4.0",
   "description": "Engine Tools library and CLI app.",
   "main": "lib/index.js",
   "bin": {
     "engine-tools": "./bin/engine-tools"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test"
   },
   "keywords": [
     "jillix",
@@ -19,16 +19,34 @@
   "bugs": {
     "url": "https://github.com/jillix/editor.git engine-editor/issues"
   },
-  "dependencies": {
-    "bluebird": "^2.9.24",
-    "bug-killer": "^1.0.0",
-    "jxutils": "^0.1.8",
-    "ul": "^2.1.0"
-  },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/jillix/engine-tools.git"
   },
+  "homepage": "https://github.com/jillix/engine-tools",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "clp": "^1.1.0",
+    "bluebird": "^2.9.24",
+    "bug-killer": "^1.0.0",
+    "exec-limiter": "^1.0.0",
+    "fs-plus": "^2.7.0",
+    "giturlparse": "^1.1.0",
+    "gry": "^2.1.0",
+    "jxutils": "^0.1.8",
+    "package-json": "^1.1.0",
+    "npm-keyword": "^1.1.1",
+    "oargv": "^1.2.0",
+    "read-json": "^0.1.0",
+    "tmp": "^0.0.25",
+    "ul": "^2.1.0",
+    "write-json": "^0.2.0"
+  },
+<<<<<<< HEAD
   "homepage": "https://github.com/jillix/engine-tools"
+=======
+  "devDependencies": {}
+>>>>>>> 943f8e8179241f224cf0b12d51fa33786f98ce40
 }
