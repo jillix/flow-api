@@ -73,6 +73,6 @@ args.push(function (err, data) {
 });
 
 var res = EngineTools[method].apply(EngineTools, args);
-if (typeof res !== "object") {
+if (res !== undefined && typeof res !== "object") {
     console.log(res);
 }
