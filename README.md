@@ -23,6 +23,30 @@ Generates content for .service.json file.
 #### Return
 - **Promise** A promise used to run the function steps.
 
+#### `entrypoint(username, project, instance, host, pub)`
+Generates entrypoints by providing needed data.
+
+##### Params
+- **String** `username`: The username.
+- **String** `project`: The project name.
+- **String** `instance`: The instance name.
+- **String** `host`: The host value.
+- **Boolean** `pub`: A flag if the domain is public or not.
+
+##### Return
+- **String** The generated entrypoint.
+
+#### `generateSymlinks(project, username, callback)`
+Generates symlinks for a provided project.
+
+##### Params
+- **String** `project`: The project name.
+- **String** `username`: The username.
+- **Function** `callback`: The callback function.
+
+##### Return
+- **EngineTools** The `EngineTools` instance.
+
 ### `packPath(path)`
 Returns the full path to the package.json located into `path`.
 
