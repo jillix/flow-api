@@ -8,8 +8,28 @@ $ npm install -g engine-tools
 ```
 
 ## CLI Usage
+
 ```sh
-$ engine-tools generateModuleService <optional-path-to-package.json>
+$ engine-tools -h
+Usage: engine-tools [options]
+
+Options:
+  -h, --help             Displays this help.
+  -v, --version          Displays version information.
+  -m, --method <method>  The method to run.
+  -a, --args <args>      The arguments passed to the provided method.
+  -l, --list             List the available methods.
+
+Examples:
+  engine-tools -m projectPack -a foo # Get the package.json of foo
+  engine-tools -m installModule -a "foo bar" # Install bar in foo
+  engine-tools -l # list available methods
+
+Make sure that you read the jillix Engine docs.
+This tool uses the $ENGINE_APPS env variable
+representing the absolute path to the Engine apps directory.
+
+Documentation can be found at https://github.com/jillix/engine-tools
 ```
 
 ## Documentation
