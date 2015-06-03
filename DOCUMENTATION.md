@@ -1,7 +1,7 @@
 ## `generateModuleService(path, callback)`
 Generates content for .service.json file.
 
-### Params 
+### Params
 - **String** `path`: The path to the package.json file.
 - **Function** `callback`: A function called with error and .serivce.json file content.
 
@@ -11,7 +11,7 @@ Generates content for .service.json file.
 ## `entrypoint(username, project, instance, host, pub)`
 Generates entrypoints by providing needed data.
 
-### Params 
+### Params
 - **String** `username`: The username.
 - **String** `project`: The project name.
 - **String** `instance`: The instance name.
@@ -24,7 +24,7 @@ Generates entrypoints by providing needed data.
 ## `generateSymlinks(project, username, callback)`
 Generates symlinks for a provided project.
 
-### Params 
+### Params
 - **String** `project`: The project name.
 - **String** `username`: The username.
 - **Function** `callback`: The callback function.
@@ -35,7 +35,7 @@ Generates symlinks for a provided project.
 ## `packPath(path)`
 Returns the full path to the package.json located into `path`.
 
-### Params 
+### Params
 - **String** `path`: The path to the directory containing the package.json file.
 
 ### Return
@@ -44,7 +44,7 @@ Returns the full path to the package.json located into `path`.
 ## `projectPackPath(project)`
 Returns the full path to the package.json located in the project.
 
-### Params 
+### Params
 - **String** `project`: The project name.
 
 ### Return
@@ -53,7 +53,7 @@ Returns the full path to the package.json located in the project.
 ## `getProjectPath(project)`
 Returns the full path to the project directory.
 
-### Params 
+### Params
 - **String** `project`: The project name.
 
 ### Return
@@ -62,7 +62,7 @@ Returns the full path to the project directory.
 ## `projectExistsSync(project)`
 Checks if the project exists or not.
 
-### Params 
+### Params
 - **String** `project`: The project name.
 
 ### Return
@@ -71,7 +71,7 @@ Checks if the project exists or not.
 ## `projectPack(project, callback)`
 Fetches the project package.json object.
 
-### Params 
+### Params
 - **String** `project`: The project name.
 - **Function** `callback`: The callback function.
 
@@ -81,7 +81,7 @@ Fetches the project package.json object.
 ## `getNpmModules(callback)`
 Fetches the Engine modules from NPM.
 
-### Params 
+### Params
 - **Function** `callback`: The callback function.
 
 ### Return
@@ -111,7 +111,7 @@ EngineTools.isEngineModule({
 });
 ```
 
-### Params 
+### Params
 - **String|Object** `input`: A string representing the path to a directory containing the package.json file or even to the package.json file or the package object itself.
 - **Function** `callback`: The callback function called with two parameters: a boolean value (`true` if the provided input is an Engine module) and the package object.
 
@@ -121,7 +121,7 @@ EngineTools.isEngineModule({
 ## `appModules(path, callback)`
 Fetches the installed Engine modules.
 
-### Params 
+### Params
 - **String** `path`: The path to the project.
 - **Function** `callback`: The callback function.
 
@@ -131,10 +131,9 @@ Fetches the installed Engine modules.
 ## `availableModules(app, callback)`
 Fetches the available modules for a project.
 
-### Params 
+### Params
 - **String** `app`: The project name.
 - **Function** `callback`: The callback function.
 
 ### Return
 - **EngineTools** The `EngineTools` instance.
-
