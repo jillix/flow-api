@@ -137,3 +137,33 @@ Fetches the available modules for a project.
 
 ### Return
 - **EngineTools** The `EngineTools` instance.
+
+## `getModuleInfo(module, callback)`
+Gets information about a provided module.
+
+### Params
+- **String** `module`: The module to get info about (can be a npm module name or a git url).
+- **Function** `callback`: The callback function.
+
+### Return
+- **EngineTools** The `EngineTools` instance.
+
+## `installModule(project, module, callback)`
+Installs a provided module in a provided project.
+
+### Params
+- **String** `project`: The project name.
+- **String** `module`: The module to install (can be a npm module name or a git url).
+- **Function** `callback`: The callback function.
+
+### Return
+- **EngineTools** The `EngineTools` instance.
+
+## `linkData(callback)`
+Generates a wrapper function for `link.data`.
+
+### Params
+- **Function** `callback`: The callback function called with error and data.
+
+### Return
+- **Function** The wrapper function.
