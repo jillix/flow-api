@@ -28,21 +28,25 @@
     "test": "test"
   },
   "dependencies": {
+    "abs": "^1.0.0",
     "bug-killer": "^4.0.0",
-    "clp": "^1.1.0",
+    "clp": "^1.2.0",
     "exec-limiter": "^2.0.0",
-    "fs-plus": "^2.7.0",
-    "giturlparse": "^1.1.0",
+    "fs-plus": "^2.8.1",
+    "giturlparse": "^1.2.0",
     "gry": "^2.1.0",
+    "is-there": "^4.0.0",
     "jxutils": "^0.1.8",
     "lnf": "^1.1.1",
-    "npm-keyword": "^1.1.1",
+    "npm-keyword": "^1.2.0",
     "oargv": "^1.2.0",
-    "package-json": "^1.1.0",
-    "r-json": "1.0.0",
+    "one-by-one": "^2.0.0",
+    "package-json": "^1.2.0",
+    "r-json": "^1.0.0",
+    "same-time": "^2.0.0",
     "tmp": "^0.0.25",
     "ul": "^2.1.0",
-    "w-json": "1.0.0"
+    "w-json": "^1.0.0"
   },
   "devDependencies": {}
 }
