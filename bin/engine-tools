@@ -7,10 +7,6 @@ var EngineTools = require("../lib")
   , Pack = require("../package.json")
   ;
 
-// Configure logger
-Logger.config.logLevel = 4;
-Logger.config.displayDate = false;
-
 // Create the clp parser
 var parser = new CLP({
     name: "Engine Tools"
