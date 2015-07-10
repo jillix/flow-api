@@ -195,3 +195,10 @@ Checks the composition file names.
 - **String** `project`: The project name.
 - **Function** `callback`: The callback function.
 
+### `setNames(project, callback)`
+Sets the instance names using the file names.
+
+#### Params
+- **String** `project`: The project name.
+- **Function** `callback`: The callback function.
+
