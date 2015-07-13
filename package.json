@@ -1,6 +1,6 @@
 {
   "name": "engine-tools",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "description": "Engine Tools library and CLI app.",
   "main": "lib/index.js",
   "bin": {
