@@ -11,12 +11,12 @@ Generates content for .service.json file.
 #### Return
 - **Promise** A promise used to run the function steps.
 
-### `entrypoint(username, project, instance, host, pub)`
+### `entrypoint(username, app, instance, host, pub)`
 Generates entrypoints by providing needed data.
 
 #### Params
 - **String** `username`: The username.
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 - **String** `instance`: The instance name.
 - **String** `host`: The host value.
 - **Boolean** `pub`: A flag if the domain is public or not.
@@ -24,23 +24,23 @@ Generates entrypoints by providing needed data.
 #### Return
 - **String** The generated entrypoint.
 
-### `getCompositionDir(project)`
+### `getCompositionDir(app)`
 Returns the path to the composition directory.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 
 #### Return
 - **String** The path to the composition directory.
 
-### `getInstances(project, callback)`
-Gets the instances of a project.
+### `getInstances(app, callback)`
+Gets the instances of a app.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 - **Function** `callback`: The callback function.
 
-### `getComposition(project, callback)`
+### `getComposition(app, callback)`
 Reads the composition files and sends an object:
 
 ```js
@@ -48,14 +48,14 @@ Reads the composition files and sends an object:
 ```
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 - **Function** `callback`: The callback function.
 
-### `generateSymlinks(project, username, callback)`
-Generates symlinks for a provided project.
+### `generateSymlinks(app, username, callback)`
+Generates symlinks for a provided app.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 - **String** `username`: The username.
 - **Function** `callback`: The callback function.
 
@@ -71,48 +71,48 @@ Returns the full path to the package.json located into `path`.
 #### Return
 - **String** The path to the package.json.
 
-### `projectPackPath(project)`
-Returns the full path to the package.json located in the project.
+### `appPackPath(app)`
+Returns the full path to the package.json located in the app.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 
 #### Return
-- **String** The path to the project package.json file.
+- **String** The path to the app package.json file.
 
-### `getProjectPath(project)`
-Returns the full path to the project directory.
+### `getAppPath(app)`
+Returns the full path to the app directory.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 
 #### Return
-- **String** The full path to the project directory.
+- **String** The full path to the app directory.
 
-### `projectExistsSync(project)`
-Checks if the project exists or not.
+### `appExistsSync(app)`
+Checks if the app exists or not.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 
 #### Return
-- **Boolean** `true` if the project exists, `false` otherwise.
+- **Boolean** `true` if the app exists, `false` otherwise.
 
-### `projectPack(project, callback)`
-Fetches the project package.json object.
+### `appPack(app, callback)`
+Fetches the app package.json object.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 - **Function** `callback`: The callback function.
 
 #### Return
 - **EngineTools** The `EngineTools` instance.
 
-### `modulePack(project, mod, callback)`
+### `modulePack(app, mod, callback)`
 Reads the module package.json.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 - **String** `mod`: The module name.
 - **Function** `callback`: The callback function.
 
@@ -163,27 +163,27 @@ EngineTools.isEngineModule({
 Fetches the installed Engine modules.
 
 #### Params
-- **String** `path`: The path to the project.
+- **String** `path`: The path to the app.
 - **Function** `callback`: The callback function.
 
 #### Return
 - **EngineTools** The `EngineTools` instance.
 
 ### `availableModules(app, callback)`
-Fetches the available modules for a project.
+Fetches the available modules for a app.
 
 #### Params
-- **String** `app`: The project name.
+- **String** `app`: The app name.
 - **Function** `callback`: The callback function.
 
 #### Return
 - **EngineTools** The `EngineTools` instance.
 
-### `installModule(project, module, callback)`
-Installs a provided module in a provided project.
+### `installModule(app, module, callback)`
+Installs a provided module in a provided app.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 - **String** `module`: The module to install (can be a npm module name or a git url).
 - **Function** `callback`: The callback function.
 
@@ -199,11 +199,11 @@ Generates a wrapper function for `link.data`.
 #### Return
 - **Function** The wrapper function.
 
-### `checkNames(project, callback)`
+### `checkNames(app, callback)`
 Checks the composition file names.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 - **Function** `callback`: The callback function.
 
 ### `nameFromInstancePath(path)`
@@ -215,11 +215,11 @@ Gets the instance name by providing the path.
 #### Return
 - **String** The instance name.
 
-### `setNames(project, callback)`
+### `setNames(app, callback)`
 Sets the instance names using the file names.
 
 #### Params
-- **String** `project`: The project name.
+- **String** `app`: The app name.
 - **Function** `callback`: The callback function.
 
 ### `getServicePath(app, mod)`
