@@ -67,6 +67,7 @@ args.push(function (err, data) {
     }
     console.log(JSON.stringify(data, null, 4));
 });
+console.log(args);
 
 var res = EngineTools[method].apply(EngineTools, args);
 if (res !== undefined && typeof res !== "object") {

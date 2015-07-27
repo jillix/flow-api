@@ -108,6 +108,17 @@ Fetches the project package.json object.
 #### Return
 - **EngineTools** The `EngineTools` instance.
 
+### `modulePack(project, mod, callback)`
+Reads the module package.json.
+
+#### Params
+- **String** `project`: The project name.
+- **String** `mod`: The module name.
+- **Function** `callback`: The callback function.
+
+#### Return
+- **EngineTools** The `EngineTools` instance.
+
 ### `getNpmModules(callback)`
 Fetches the Engine modules from NPM.
 
@@ -195,10 +206,45 @@ Checks the composition file names.
 - **String** `project`: The project name.
 - **Function** `callback`: The callback function.
 
+### `nameFromInstancePath(path)`
+Gets the instance name by providing the path.
+
+#### Params
+- **String** `path`: The instance path.
+
+#### Return
+- **String** The instance name.
+
 ### `setNames(project, callback)`
 Sets the instance names using the file names.
 
 #### Params
 - **String** `project`: The project name.
+- **Function** `callback`: The callback function.
+
+### `getServicePath(app, mod)`
+Builds the path to the .service.json file.
+
+#### Params
+- **String** `app`: The app name.
+- **String** `mod`: The module name.
+
+#### Return
+- **String** The .service.json file path.
+
+### `getService(app, mod, callback)`
+Reads the .service.json file.
+
+#### Params
+- **String** `app`: The app name.
+- **String** `mod`: The module name.
+- **Function** `callback`: The callback function.
+
+### `getModuleInfo(app, mod, callback)`
+Gets the module information.
+
+#### Params
+- **String** `app`: The app name.
+- **String** `mod`: The module name.
 - **Function** `callback`: The callback function.
 
