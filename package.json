@@ -46,7 +46,8 @@
     "same-time": "^2.0.0",
     "tmp": "^0.0.25",
     "ul": "^5.0.0",
-    "w-json": "^1.0.0"
+    "w-json": "^1.0.0",
+    "deffy": "2.0.0"
   },
   "devDependencies": {}
 }
