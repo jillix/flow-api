@@ -240,6 +240,16 @@ Reads the .service.json file.
 - **String** `mod`: The module name.
 - **Function** `callback`: The callback function.
 
+### `getService(app, mod, data, callback)`
+setService
+Writes the .service.json file.
+
+#### Params
+- **String** `app`: The app name.
+- **String** `mod`: The module name.
+- **Object** `data`: The data to write.
+- **Function** `callback`: The callback function.
+
 ### `getModuleInfo(app, mod, callback)`
 Gets the module information.
 
