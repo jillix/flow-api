@@ -40,7 +40,7 @@ Gets the instances of a app.
 - **String** `app`: The app name.
 - **Function** `callback`: The callback function.
 
-### `getComposition(app, callback)`
+### `getComposition(app, options, callback)`
 Reads the composition files and sends an object:
 
 ```js
@@ -49,6 +49,8 @@ Reads the composition files and sends an object:
 
 #### Params
 - **String** `app`: The app name.
+- **Object** `options`: An object containing:
+ - `iName` (Boolean): If `true`, the instance name will be used instead of path name.
 - **Function** `callback`: The callback function.
 
 ### `generateSymlinks(app, username, callback)`
