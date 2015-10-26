@@ -224,6 +224,32 @@ Sets the instance names using the file names.
 - **String** `app`: The app name.
 - **Function** `callback`: The callback function.
 
+### `getInstancePath(app, instance)`
+Gets the instance path.
+
+#### Params
+- **String** `app`: The application name.
+- **Object|String** `instance`: The instance object or name.
+
+#### Return
+- **String** The instance path.
+
+### `saveInstance(app, instance, callback)`
+Saves the instance object in the file.
+
+#### Params
+- **String** `app`: The application name.
+- **Object|String** `instance`: The instance object or name.
+- **Function** `callback`: The callback function.
+
+### `deleteInstance(app, instance, callback)`
+Delets the instance from the file system.
+
+#### Params
+- **String** `app`: The application name.
+- **Object|String** `instance`: The instance object or name.
+- **Function** `callback`: The callback function.
+
 ### `getServicePath(app, mod)`
 Builds the path to the .service.json file.
 
