@@ -40,6 +40,14 @@ Gets the instances of a app.
 - **String** `app`: The app name.
 - **Function** `callback`: The callback function.
 
+### `getInstance(app, instanceName, callback)`
+Gets the specified instance.
+
+#### Params
+- **String** `app`: The app name.
+- **String** `instanceName`: The instance name.
+- **Function** `callback`: The callback function.
+
 ### `getComposition(app, options, callback)`
 Reads the composition files and sends an object:
 
