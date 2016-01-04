@@ -1,5 +1,7 @@
 // return cached api instance
-exports.cache = function (name) {};
+exports.cache = function (name) {
+    // ..get chached comp
+};
 
 // return api instance
 exports.factory = function (name) {
