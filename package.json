@@ -2,7 +2,7 @@
   "name": "engine-tools",
   "version": "1.26.0",
   "description": "Engine Tools library and CLI app.",
-  "main": "lib/index.js",
+  "main": "index.js",
   "bin": {
     "engine-tools": "./bin/engine-tools"
   },
