@@ -1,10 +1,10 @@
 {
-  "name": "engine-tools",
+  "name": "flow-api",
   "version": "1.26.0",
-  "description": "Engine Tools library and CLI app.",
+  "description": "The flow api library and CLI app.",
   "main": "lib/index.js",
   "bin": {
-    "engine-tools": "./bin/engine-tools"
+    "flow-api": "./bin/flow-api"
   },
   "scripts": {
     "test": "node test"
@@ -17,13 +17,13 @@
   "author": "jillix <contact@jillix.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jillix/engine-tools.git"
+    "url": "https://github.com/jillix/flow-api.git"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jillix/engine-tools.git"
+    "url": "https://github.com/jillix/flow-api.git"
   },
-  "homepage": "https://github.com/jillix/engine-tools",
+  "homepage": "https://github.com/jillix/flow-api",
   "directories": {
     "test": "test"
   },
