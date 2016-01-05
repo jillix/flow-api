@@ -27,6 +27,8 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "engine-app": "jillix/engine-app"
+  },
   "devDependencies": {}
 }
