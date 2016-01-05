@@ -28,7 +28,7 @@
     "test": "test"
   },
   "dependencies": {
-    "engine-app": "jillix/engine-app"
+    "engine-parser-gen": "jillix/engine-parser"
   },
   "devDependencies": {}
 }
