@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Dependencies
-var EngineTools = require("../lib")
+var FlowApi = require("../lib")
   , Logger = require("bug-killer")
   , CLP = require("clp")
   , Pack = require("../package.json")
@@ -25,9 +25,9 @@ var methodOpt = new CLP.Option(["m", "method"], "The method to run.", "method")
         aliases: ["l", "list"]
       , description: "List the available methods."
       , handler: function () {
-            Logger.log("Available methods in engine-tools:", "info");
-            console.log(Object.keys(EngineTools.__proto__).filter(function (c) {
-                return typeof EngineTools[c] === "function";
+            Logger.log("Available methods in flow-api:", "info");
+            console.log(Object.keys(FlowApi.__proto__).filter(function (c) {
+                return typeof FlowApi[c] === "function";
             }).join("\n"));
             process.exit(0);
         }
@@ -36,15 +36,15 @@ var methodOpt = new CLP.Option(["m", "method"], "The method to run.", "method")
 
 // Method option
 parser.addOption(methodOpt);
-parser.addExample("engine-tools -m projectPack -a foo # Get the package.json of foo");
+parser.addExample("flow-api -m projectPack -a foo # Get the package.json of foo");
 
 // Args option
 parser.addOption(argsOpt);
-parser.addExample("engine-tools -m installModule -a \"foo bar\" # Install bar in foo");
+parser.addExample("flow-api -m installModule -a \"foo bar\" # Install bar in foo");
 
 // List option
 parser.addOption(listOpt);
-parser.addExample("engine-tools -l # list available methods");
+parser.addExample("flow-api -l # list available methods");
 
 // Process the arguments
 parser.process();
@@ -56,7 +56,7 @@ if (!method) {
 }
 
 // Check if the method is valid
-if (typeof EngineTools[method] !== "function") {
+if (typeof FlowApi[method] !== "function") {
     return Logger.log(method + " is not a valid method.", "error");
 }
 
@@ -69,7 +69,7 @@ args.push(function (err, data) {
 });
 console.log(args);
 
-var res = EngineTools[method].apply(EngineTools, args);
+var res = FlowApi[method].apply(FlowApi, args);
 if (res !== undefined && typeof res !== "object") {
     console.log(res);
 }
