@@ -28,6 +28,7 @@
     "test": "test"
   },
   "dependencies": {
+    "deffy": "^2.2.0",
     "engine-parser": "jillix/engine-parser",
     "find-value": "^1.0.0",
     "set-value": "^0.3.2"
