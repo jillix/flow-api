@@ -135,6 +135,14 @@ Sets the instance `config` object.
 - **Object** `config`: The config object.
 - **Function** `cb`: The callback function.
 
+### `setDefaultConfigInInstance(_instanceName, moduleName, cb)`
+Merges the instance content with the `composition` field from the module `package.json`.
+
+#### Params
+- **String|Object** `_instanceName`: The instance name or content object.
+- **String** `moduleName`: The module name.
+- **Function** `cb`: The callback function.
+
 ## How to contribute
 Have an idea? Found a bug? See [how to contribute][contributing].
 
