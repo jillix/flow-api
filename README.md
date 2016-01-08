@@ -8,6 +8,20 @@ The flow api library and CLI app.
 $ npm i --save flow-api
 ```
 
+## Example
+
+```js
+const FlowApi = require("flow-api");
+
+var fa = new FlowApi("path/to/app");
+
+// Read some instance
+fa.readInstance("foo", (err, data) => {
+    console.log(err, data);
+    /* do something with the "foo" instance */
+});
+```
+
 ## Documentation
 
 ### `FlowApi(adapter)`
