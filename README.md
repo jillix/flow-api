@@ -143,6 +143,14 @@ Merges the instance content with the `composition` field from the module `packag
 - **String** `moduleName`: The module name.
 - **Function** `cb`: The callback function.
 
+### `createInstanceWithDefaultConfig(data, module, cb)`
+Creates a new instance with the default config from the module.
+
+#### Params
+- **Object** `data`: The instance raw content as object.
+- **String** `module`: The module name.
+- **Function** `cb`: The callback function.
+
 ## How to contribute
 Have an idea? Found a bug? See [how to contribute][contributing].
 
