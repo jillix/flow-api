@@ -1,20 +1,139 @@
-# `$ flow-api`
+# flow-api
 
 The flow api library and CLI app.
 
 ## Installation
 
-You can install the package globally and use it as command line tool:
-
 ```sh
-$ npm i -g flow-api
+$ npm i --save flow-api
 ```
-
-Then, run `flow-api --help` and see what the CLI tool can do.
 
 ## Documentation
 
-For full API reference, see the [DOCUMENTATION.md][docs] file.
+### `FlowApi(adapter)`
+Creates a new instance of `FlowApi`.
+
+#### Params
+- **String|CompositionAdapter** `adapter`: The path to the app or the composition adapter object.
+
+### `addEntrypoint(en, cb)`
+Adds a new entrypoint.
+
+#### Params
+- **String** `en`: The entrypoint name.
+- **Function** `cb`: The callback function.
+
+### `removeEntrypoint(en, cb)`
+Removes an existing entrypoint.
+
+#### Params
+- **String** `en`: The entrypoint name.
+- **Function** `cb`: The callback function.
+
+### `listEntrypoints(cb)`
+List the entrypoints.
+
+#### Params
+- **Function** `cb`: The callback function.
+
+### `updateEntrypoint(oldEn, newEn, cb)`
+Updates an existing entrypoint.
+
+#### Params
+- **String** `oldEn`: The entrypoint to update.
+- **String** `newEn`: The new entrypoint value.
+- **Function** `cb`: The callback function.
+
+### `getModuleComposition(moduleName, cb)`
+Gets the module composition.
+
+#### Params
+- **String** `moduleName`: The module name.
+- **Function** `cb`: The callback function.
+
+### `setListenerData(instanceName, listenerName, dataArr, cb)`
+Sets the listener data array.
+
+#### Params
+- **String** `instanceName`: The instance name.
+- **String** `listenerName`: The listener name.
+- **Array** `dataArr`: The data array.
+- **Function** `cb`: The callback function.
+
+### `setErrorEvent(instanceName, listenerName, errEvent, cb)`
+Sets the listener error event.
+
+#### Params
+- **String** `instanceName`: The instance name.
+- **String** `listenerName`: The listener name.
+- **String** `errEvent`: The listener error event to set.
+- **Function** `cb`: The callback function.
+
+### `setEndEvent(instanceName, listenerName, endEvent, cb)`
+Sets the listener end event.
+
+#### Params
+- **String** `instanceName`: The instance name.
+- **String** `listenerName`: The listener name.
+- **String** `endEvent`: The listener end event to set.
+- **Function** `cb`: The callback function.
+
+### `setListener(instanceName, listenerName, listenerData, cb)`
+Sets the listener object.
+
+#### Params
+- **String** `instanceName`: The instance name.
+- **String** `listenerName`: The listener name.
+- **Object** `listenerData`: The listener object.
+- **Function** `cb`: The callback function.
+
+### `removeListener(instanceName, listenerName, cb)`
+Removes the listener.
+
+#### Params
+- **String** `instanceName`: The instance name.
+- **String** `listenerName`: The listener name.
+- **Function** `cb`: The callback function.
+
+### `setInstanceStyles(instanceName, styles, cb)`
+Sets the styles.
+
+#### Params
+- **String** `instanceName`: The instance name.
+- **Array** `styles`: The `styles` array.
+- **Function** `cb`: The callback function.
+
+### `setInstanceMarkup(instanceName, markup, cb)`
+Sets the instance `markup` array.
+
+#### Params
+- **String** `instanceName`: The instance name.
+- **Array** `markup`: The `markup` array.
+- **Function** `cb`: The callback function.
+
+### `setInstanceLoad(instanceName, load, cb)`
+Sets the instance `load` array.
+
+#### Params
+- **String** `instanceName`: The instance name.
+- **Array** `load`: The `load` array.
+- **Function** `cb`: The callback function.
+
+### `setInstanceRoles(instanceName, roles, cb)`
+Sets the instance `roles` object.
+
+#### Params
+- **String** `instanceName`: The instance name.
+- **Object** `roles`: The `roles` object.
+- **Function** `cb`: The callback function.
+
+### `setInstanceConfig(instanceName, config, cb)`
+Sets the instance `config` object.
+
+#### Params
+- **String** `instanceName`: The instance name.
+- **Object** `config`: The config object.
+- **Function** `cb`: The callback function.
 
 ## How to contribute
 Have an idea? Found a bug? See [how to contribute][contributing].

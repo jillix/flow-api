@@ -3,9 +3,6 @@
   "version": "1.26.0",
   "description": "The flow api library and CLI app.",
   "main": "lib/index.js",
-  "bin": {
-    "flow-api": "./bin/flow-api"
-  },
   "scripts": {
     "test": "node test"
   },
