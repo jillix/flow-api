@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "deffy": "^2.2.0",
-    "engine-parser": "jillix/engine-parser",
+    "engine-builder": "jillix/engine-builder",
+    "engine-entrypoint-manager": "jillix/engine-entrypoint-manager",
     "find-value": "^1.0.0",
     "set-value": "^0.3.2",
     "ul": "^5.2.0"
