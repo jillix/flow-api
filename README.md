@@ -1,6 +1,6 @@
-# flow-api
+# flow-api [![Version](https://img.shields.io/npm/v/flow-api.svg)](https://www.npmjs.com/package/flow-api) [![Downloads](https://img.shields.io/npm/dt/flow-api.svg)](https://www.npmjs.com/package/flow-api)
 
-The flow api library and CLI app.
+> The flow api library and CLI app.
 
 ## Installation
 
@@ -111,6 +111,7 @@ Removes the listener.
 
 ### `setInstanceStyles(instanceName, styles, cb)`
 Sets the styles.
+**TODO**: Move styles methods to service-api. Check out [this issue](https://github.com/jillix/flow/issues/7).
 
 #### Params
 - **String** `instanceName`: The instance name.
@@ -119,6 +120,7 @@ Sets the styles.
 
 ### `setInstanceMarkup(instanceName, markup, cb)`
 Sets the instance `markup` array.
+**TODO**: Move styles methods to service-api. Check out [this issue](https://github.com/jillix/flow/issues/7).
 
 #### Params
 - **String** `instanceName`: The instance name.
@@ -170,6 +172,8 @@ Have an idea? Found a bug? See [how to contribute][contributing].
 
 ## Where is this library used?
 If you are using this library in one of your projects, add it in this list. :sparkles:
+
+ - [`flow-flow-api`](https://github.com/jillix/flow-flow-api) by jillix
 
 ## License
 
