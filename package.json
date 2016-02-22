@@ -29,6 +29,8 @@
     "engine-builder": "jillix/engine-builder",
     "engine-entrypoint-manager": "jillix/engine-entrypoint-manager",
     "find-value": "^1.0.0",
+    "flow-packages": "jillix/flow-package",
+    "fuzzy": "^0.1.1",
     "set-value": "^0.3.2",
     "ul": "^5.2.0"
   },
