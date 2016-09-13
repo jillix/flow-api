@@ -25,6 +25,7 @@
     "test": "test"
   },
   "dependencies": {
+    "cayley-jsonld-io": "github:jillix/cayley-jsonld-io",
     "cayley-triple-io": "github:jillix/cayley-triple-io",
     "set-or-get": "^1.0.0",
     "iterate-object": "^1.1.0"
