@@ -25,10 +25,11 @@
     "test": "test"
   },
   "dependencies": {
-    "cayley-jsonld-io": "github:jillix/cayley-jsonld-io",
+    "cayley": "github:danandrei/cayley.js",
+    "iterate-object": "^1.1.0",
     "n3": "^0.5.0",
-    "set-or-get": "^1.0.0",
-    "iterate-object": "^1.1.0"
+    "schema": "github:jillix/schema",
+    "set-or-get": "^1.0.0"
   },
   "devDependencies": {}
 }
