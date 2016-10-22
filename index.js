@@ -1,3 +1,7 @@
+'use strict'
+
+const flowAdapter = require('./flow_adapter');
+
 // Dependencies
 var SetOrGet = require('set-or-get')
   , IterateObject = require('iterate-object')
@@ -11,9 +15,10 @@ module.exports = {};
  * @private
 */
 module.exports.init = function (config, ready) {
-
     ready();
 }
+
+module.exports.adapter = flowAdapter;
 
 /**
  * Generate a wrapper for the appended data handler
