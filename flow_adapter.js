@@ -23,14 +23,14 @@ exports.read = (args, data, next) => {
         if (result && result.length) {
             result.forEach(item => array.push([item.subject, item.predicate, item.id]));
         }
-
         if (++count === 3) {
 
             if (!array.length) {
                 return next(new Error('Flow-nodejs.adapter.cayley.read: Empty result for "' + event_iri + '".'));
             }
 
-            next(null, array);
+            data.result = array;
+            next(null, data);
         }
     };
 
