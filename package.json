@@ -25,6 +25,7 @@
     "test": "test"
   },
   "dependencies": {
+    "cayley-jsonld-io": "github:jillix/cayley-jsonld-io",
     "cayley": "github:danandrei/cayley.js",
     "iterate-object": "^1.1.0",
     "n3": "^0.5.0",
