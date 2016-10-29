@@ -96,3 +96,44 @@ exports.mod = (args, data, next) => {
         next(null, module);
     });
 };
+
+exports.instances = (args, data, next) => {
+
+    g.V()
+    .Tag('subject')
+    .Has(type_predicate, vocab + 'ModuleInstanceConfig')
+    .Out([
+      'http://schema.org/name',
+      vocab + 'module'
+    ], 'predicate')
+    .All((err, result) => {
+
+        if (!err && result && result.length) {
+            data.result = [];
+            result.forEach(item => data.result.push([item.subject, item.predicate, item.id]));
+        }
+
+        next(err, data);
+    });
+};
+
+exports.instance = (args, data, next) => {
+
+    if (!data.id) {
+        return next(new Error('Flow-api.instance: No id found.'));
+    }
+
+    g.V(data.id)
+    .Tag('subject')
+    .Out(vocab + 'event', 'predicate')
+    .Out('http://schema.org/name')
+    .All((err, result) => {
+
+        data.result = [];
+        if (!err && result && result.length) {
+            result.forEach(item => data.result.push([item.subject, item.predicate, item.id]));
+        }
+
+        next(err, data);
+    });
+};
