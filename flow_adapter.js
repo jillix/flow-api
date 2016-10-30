@@ -137,3 +137,25 @@ exports.instance = (args, data, next) => {
         next(err, data);
     });
 };
+
+exports.event = (args, data, next) => {
+
+    if (!data.id) {
+        return next(new Error('Flow-api.event: No id found.'));
+    }
+
+    // TODO query
+    g.V(data.id)
+    .Tag('subject')
+    .Out(vocab + 'event', 'predicate')
+    .Out('http://schema.org/name')
+    .All((err, result) => {
+
+        data.result = [];
+        if (!err && result && result.length) {
+            result.forEach(item => data.result.push([item.subject, item.predicate, item.id]));
+        }
+
+        next(err, data);
+    });
+};
