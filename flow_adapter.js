@@ -97,19 +97,38 @@ exports.mod = (args, data, next) => {
     });
 };
 
-exports.instances = (args, data, next) => {
+/*
+    TODO move everything below to the API lib
+*/
+
+exports.modules = (args, data, next) => {
 
     g.V()
     .Tag('subject')
-    .Has(type_predicate, vocab + 'ModuleInstanceConfig')
-    .Out([
-      'http://schema.org/name',
-      vocab + 'module'
-    ], 'predicate')
+    .Has(type_predicate, vocab + 'Module')
+    .Save('http://schema.org/name', 'subject')
+    .Save(type_predicate, 'predicate')
     .All((err, result) => {
 
+        data.result = [];
         if (!err && result && result.length) {
-            data.result = [];
+            result.forEach(item => data.result.push([item.subject, item.predicate, item.id]));
+        }
+
+        next(err, data);
+    });
+};
+
+exports.instances = (args, data, next) => {
+
+    g.V()
+    .Has(vocab + 'module', data.id)
+    .Save(vocab + 'module', 'subject')
+    .Save(type_predicate, 'predicate')
+    .All((err, result) => {
+
+        data.result = [];
+        if (!err && result && result.length) {
             result.forEach(item => data.result.push([item.subject, item.predicate, item.id]));
         }
 
@@ -122,11 +141,9 @@ exports.instance = (args, data, next) => {
     if (!data.id) {
         return next(new Error('Flow-api.instance: No id found.'));
     }
-
     g.V(data.id)
     .Tag('subject')
     .Out(vocab + 'event', 'predicate')
-    .Out('http://schema.org/name')
     .All((err, result) => {
 
         data.result = [];
@@ -144,18 +161,33 @@ exports.event = (args, data, next) => {
         return next(new Error('Flow-api.event: No id found.'));
     }
 
-    // TODO query
-    g.V(data.id)
-    .Tag('subject')
-    .Out(vocab + 'event', 'predicate')
-    .Out('http://schema.org/name')
-    .All((err, result) => {
+    let called = 0;
+    const handler = (err, result) => {
 
-        data.result = [];
+        data.result = data.result || [];
         if (!err && result && result.length) {
             result.forEach(item => data.result.push([item.subject, item.predicate, item.id]));
         }
 
-        next(err, data);
-    });
+        ++called === 2 && next(err, data);
+    };
+
+    g.V(data.id)
+    .Tag('subject')
+    .Out(vocab + 'sequence', 'predicate').All(handler);
+
+    g.V().Has(
+      vocab + 'event',
+      data.id
+    ).Has(
+      type_predicate,
+      vocab + 'Sequence'
+    ).Tag('subject').Out([
+      vocab + 'dataHandler',
+      vocab + 'onceHandler',
+      vocab + 'streamHandler',
+      vocab + 'emit',
+      vocab + 'sequence'
+    ], 'predicate')
+    .All(handler);
 };
