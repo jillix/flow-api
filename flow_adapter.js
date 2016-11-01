@@ -191,3 +191,29 @@ exports.event = (args, data, next) => {
     ], 'predicate')
     .All(handler);
 };
+
+exports.handler = (args, data, next) => {
+
+    if (!data.id) {
+        return next(new Error('Flow-api.instance: No id found.'));
+    }
+
+    g.V(data.id)
+    .Tag('subject')
+    .Out([
+        vocab + 'instance',
+        vocab + 'dataHandler',
+        vocab + 'onceHandler',
+        vocab + 'streamHandler',
+        vocab + 'emit'
+    ], 'predicate')
+    .All((err, result) => {
+
+        data.result = [];
+        if (!err && result && result.length) {
+            result.forEach(item => data.result.push([item.subject, item.predicate, item.id]));
+        }
+
+        next(err, data);
+    });
+};
