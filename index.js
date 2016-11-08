@@ -3,10 +3,12 @@
 // Dependencies
 const adapter = require('./lib/adapter');
 const modules = require('./lib/modules');
-const events= require('./lib/events');
+const events = require('./lib/events');
+const cayley = require('./lib/cayley');
 
 // export API methods
 module.exports = {
+    connect: cayley.connect,
     vis: {
         modules: modules.modules,
         instances: modules.instances,
@@ -16,15 +18,3 @@ module.exports = {
     },
     adapter: adapter
 };
-
-
-/**
- * Main init function
- *
- * @private
-*/
-module.exports.init = (config, ready) => {
-    ready();
-};
-
-
