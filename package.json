@@ -25,7 +25,7 @@
     "test": "test"
   },
   "dependencies": {
-    "cayley": "github:danandrei/cayley.js",
+    "cayley": "github:adioo/cayley.js",
     "schema": "github:jillix/schema"
   },
   "devDependencies": {}
