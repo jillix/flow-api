@@ -5,6 +5,7 @@ const adapter = require('./lib/adapter');
 const modules = require('./lib/modules');
 const events = require('./lib/events');
 const cayley = require('./lib/cayley');
+const utils = require('./lib/utils');
 
 // export API methods
 module.exports = {
@@ -16,5 +17,6 @@ module.exports = {
         event: events.event,
         handler: events.handler
     },
-    adapter: adapter
+    adapter: adapter,
+    utils: utils
 };
