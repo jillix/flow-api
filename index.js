@@ -2,16 +2,37 @@
 
 // Dependencies
 const adapter = require('./lib/adapter');
-const modules = require('./lib/modules');
-const instances = require('./lib/instances');
-const events = require('./lib/events');
+//const modules = require('./lib/modules');
+//const instances = require('./lib/instances');
+//const events = require('./lib/events');
 const cayley = require('./lib/cayley');
 const utils = require('./lib/utils');
 
 // export API methods
 module.exports = {
     connect: cayley.connect,
-    vis: {
+    get: {
+        flow: (scope, state, args, data, next) => {
+
+            if (!data.id) {
+                return next(new Error('Flow-api.get.flow: missing sequence id.'));
+            }
+
+            data.readable = cayley.flow(state.g, data.id);
+            data.readable[0].pause();
+            data.readable[2].pause();
+            data.readable[3].pause();
+            data.resume = data.readable;
+            next(null, data);
+        }
+        //entrypoints: adapter.entrypoints,
+        //sequence: sequence.detail,
+        //handler: sequence.handler,
+        //method: method
+    },
+    set: {},
+    del: {}
+    /*vis: {
         modules: {
             get: modules.get,
             details: modules.details
@@ -29,7 +50,7 @@ module.exports = {
             handler: events.handler,
             handlerDetails: events.handlerDetails
         }
-    },
-    adapter: adapter,
+    },*/
+    //adapter: adapter,
     utils: utils
 };
