@@ -1,7 +1,4 @@
-'use strict';
-
 // Dependencies
-const adapter = require('./lib/adapter');
 //const modules = require('./lib/modules');
 //const instances = require('./lib/instances');
 //const events = require('./lib/events');
@@ -18,20 +15,22 @@ module.exports = {
                 return next(new Error('Flow-api.get.flow: missing sequence id.'));
             }
 
-            data.readable = cayley.flow(state.g, data.id);
+            let role = !data.session || !data.session.role ? scope.env.role : data.session.role;
+
+            data.readable = cayley.flow(state.g, data.id, role);
             data.readable[0].pause();
+            data.readable[1].pause();
             data.readable[2].pause();
-            data.readable[3].pause();
             data.resume = data.readable;
             next(null, data);
         }
-        //entrypoints: adapter.entrypoints,
+        //entrypoints: sequence.entrypoints,
         //sequence: sequence.detail,
         //handler: sequence.handler,
         //method: method
     },
     set: {},
-    del: {}
+    del: {},
     /*vis: {
         modules: {
             get: modules.get,
@@ -51,6 +50,5 @@ module.exports = {
             handlerDetails: events.handlerDetails
         }
     },*/
-    //adapter: adapter,
     utils: utils
 };
