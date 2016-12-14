@@ -11,13 +11,15 @@ module.exports = {
     connect: cayley.connect,
     get: {
         flow: sequence.flow,
+        networks: sequence.networks,
         entrypoints: sequence.entrypoints,
-        //sequence: sequence.detail,
-        //handler: sequence.handler,
-        //method: method
+        entrypoint: sequence.entrypoint,
+        sequence: sequence.sequence,
+        handler: sequence.handler
     },
     set: {},
     del: {},
+    utils: utils
     /*vis: {
         modules: {
             get: modules.get,
@@ -37,5 +39,4 @@ module.exports = {
             handlerDetails: events.handlerDetails
         }
     },*/
-    utils: utils
 };
