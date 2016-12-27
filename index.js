@@ -2,12 +2,13 @@
 //const modules = require('./lib/modules');
 //const instances = require('./lib/instances');
 //const events = require('./lib/events');
-const cayley = require('./lib/cayley');
+const cayley = require('cayley');
+const GET = require('./lib/cayley_get');
 const utils = require('./lib/utils');
 
 function getHandler (method, params) {
 
-    if (typeof cayley[method] !== 'function') {
+    if (typeof GET[method] !== 'function') {
         throw new Error('Flow-api.cayley: Method "' + method + '" doesn\' exists.');
     }
 
@@ -25,7 +26,7 @@ function getHandler (method, params) {
 
         query_args.push(!data.session || !data.session.role ? scope.env.role : data.session.role);
 
-        data.readable = cayley[method].apply(null, query_args);
+        data.readable = GET[method].apply(null, query_args);
 
         try {
             if (data.readable instanceof Array) {
@@ -44,7 +45,12 @@ function getHandler (method, params) {
 
 // export API methods
 module.exports = {
-    connect: cayley.connect,
+    // export the cayley client for custom use
+    connect: (scope, state, args, data, next) => {
+        state.client = cayley(scope.env.db);
+        state.g = state.client.graph;
+        return next ? next(null, data) : data;
+    },
     utils: utils,
     flow: getHandler('flow', ['id']),
     vis: {
