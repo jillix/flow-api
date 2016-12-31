@@ -4,21 +4,32 @@
 //const events = require('./lib/events');
 const cayley = require('cayley');
 const GET = require('./lib/cayley_get');
+const PUT = require('./lib/cayley_put');
 const utils = require('./lib/utils');
 
-function getHandler (method, params) {
+function connect (state, db) {
+    state.client = cayley(db);
+    state.g = state.client.graph;
+}
 
-    if (typeof GET[method] !== 'function') {
-        throw new Error('Flow-api.cayley: Method "' + method + '" doesn\' exists.');
+function getHandler (fn, params) {
+
+    if (typeof GET[fn] !== 'function') {
+        throw new Error('Flow-api.cayley: Method "' + fn + '" doesn\' exists.');
     }
 
     return (scope, state, args, data, next) => { 
+
+        // create db client for state
+        if (!state.client) {
+            connect(state, scope.env.db);
+        }
 
         let query_args = [state.g];
         for (let i = 0, l = params.length; i < l; ++i) {
 
             if (typeof data[params[i]] === 'undefined') {
-                return next(new Error('Flow-api.get.' + method  + ': Missing parameter "' + params[i]  + '".'));
+                return next(new Error('Flow-api.get.' + fn  + ': Missing parameter "' + params[i]  + '".'));
             }
 
             query_args.push(data[params[i]]);
@@ -26,7 +37,7 @@ function getHandler (method, params) {
 
         query_args.push(!data.session || !data.session.role ? scope.env.role : data.session.role);
 
-        data.readable = GET[method].apply(null, query_args);
+        data.readable = GET[fn].apply(null, query_args);
 
         try {
             if (data.readable instanceof Array) {
@@ -43,14 +54,20 @@ function getHandler (method, params) {
     }
 } 
 
+function putHandler (scope, state, args, data, next) {
+
+    // create db client for state
+    if (!state.client) {
+        connect(state, scope.env.db);
+    }
+
+    console.log('Flow-api.PUT:', Object.keys(data));
+    data.body = {"hoi": "do"};
+    next(null, data);
+}
+
 // export API methods
 module.exports = {
-    // export the cayley client for custom use
-    connect: (scope, state, args, data, next) => {
-        state.client = cayley(scope.env.db);
-        state.g = state.client.graph;
-        return next ? next(null, data) : data;
-    },
     utils: utils,
     flow: getHandler('flow', ['id']),
     vis: {
@@ -61,6 +78,6 @@ module.exports = {
         handler: getHandler('vis_handler', ['id'])
     },
     get: getHandler('get', ['id', 'type']),
-    set: {},
+    put: putHandler,
     del: {}
 };
