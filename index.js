@@ -61,8 +61,8 @@ function putHandler (scope, state, args, data, next) {
         connect(state, scope.env.db);
     }
 
-    console.log('Flow-api.PUT:', Object.keys(data));
-    data.body = {"hoi": "do"};
+    data.req.on('data', triple => PUT.put(state.client, triple));
+    data.body = {status: "ok"};
     next(null, data);
 }
 
