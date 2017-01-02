@@ -3,6 +3,8 @@
 //const instances = require('./lib/instances');
 //const events = require('./lib/events');
 const cayley = require('cayley');
+const Adapter = require('./lib/cayley_adapter');
+const VIS = require('./lib/cayley_vis');
 const GET = require('./lib/cayley_get');
 const PUT = require('./lib/cayley_put');
 const utils = require('./lib/utils');
@@ -12,9 +14,9 @@ function connect (state, db) {
     state.g = state.client.graph;
 }
 
-function getHandler (fn, params) {
+function getHandler (Methods, fn, params) {
 
-    if (typeof GET[fn] !== 'function') {
+    if (typeof Methods[fn] !== 'function') {
         throw new Error('Flow-api.cayley: Method "' + fn + '" doesn\' exists.');
     }
 
@@ -37,7 +39,7 @@ function getHandler (fn, params) {
 
         query_args.push(!data.session || !data.session.role ? scope.env.role : data.session.role);
 
-        data.readable = GET[fn].apply(null, query_args);
+        data.readable = Methods[fn].apply(null, query_args);
 
         try {
             if (data.readable instanceof Array) {
@@ -70,15 +72,15 @@ function putHandler (scope, state, args, data, next) {
 module.exports = {
     _connect: connect,
     utils: utils,
-    flow: getHandler('flow', ['id']),
+    flow: getHandler(Adapter, 'flow', ['id']),
     vis: {
-        networks: getHandler('vis_networks', ['id']),
-        entrypoints: getHandler('vis_entrypoints', ['id']),
-        entrypoint: getHandler('vis_entrypoint', ['id']),
-        sequence: getHandler('vis_sequence', ['id']),
-        handler: getHandler('vis_handler', ['id'])
+        networks: getHandler(VIS, 'vis_networks', ['id']),
+        entrypoints: getHandler(VIS, 'vis_entrypoints', ['id']),
+        entrypoint: getHandler(VIS, 'vis_entrypoint', ['id']),
+        sequence: getHandler(VIS, 'vis_sequence', ['id']),
+        handler: getHandler(VIS, 'vis_handler', ['id'])
     },
-    get: getHandler('get', ['id', 'type']),
+    get: getHandler(GET, 'get', ['id', 'type']),
     put: putHandler,
     del: {}
 };
