@@ -68,6 +68,7 @@ function putHandler (scope, state, args, data, next) {
 
 // export API methods
 module.exports = {
+    _connect: connect,
     utils: utils,
     flow: getHandler('flow', ['id']),
     vis: {
