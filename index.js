@@ -78,7 +78,8 @@ module.exports = {
         entrypoints: getHandler(VIS, 'vis_entrypoints', ['id']),
         entrypoint: getHandler(VIS, 'vis_entrypoint', ['id']),
         sequence: getHandler(VIS, 'vis_sequence', ['id']),
-        handler: getHandler(VIS, 'vis_handler', ['id'])
+        handler: getHandler(VIS, 'vis_handler', ['id']),
+        object: getHandler(VIS, 'vis_object', ['id'])
     },
     get: getHandler(GET, 'get', ['id', 'type']),
     put: putHandler,
