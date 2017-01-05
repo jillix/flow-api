@@ -6,7 +6,8 @@ const cayley = require('cayley');
 const Adapter = require('./lib/cayley_adapter');
 const VIS = require('./lib/cayley_vis');
 const GET = require('./lib/cayley_get');
-const PUT = require('./lib/cayley_put');
+const POST = require('./lib/cayley_post');
+const DELETE = require('./lib/cayley_delete');
 const utils = require('./lib/utils');
 
 function connect (state, db) {
@@ -56,14 +57,26 @@ function getHandler (Methods, fn, params) {
     }
 } 
 
-function putHandler (scope, state, args, data, next) {
+function postHandler (scope, state, args, data, next) {
 
     // create db client for state
     if (!state.client) {
         connect(state, scope.env.db);
     }
 
-    data.req.on('data', triple => PUT.put(state.client, triple));
+    data.req.on('data', req => POST(state.client, req));
+    data.body = {status: "ok"};
+    next(null, data);
+}
+
+function deleteHandler (scope, state, args, data, next) {
+
+    // create db client for state
+    if (!state.client) {
+        connect(state, scope.env.db);
+    }
+
+    DELETE(state.client, data.req.url);
     data.body = {status: "ok"};
     next(null, data);
 }
@@ -82,6 +95,7 @@ module.exports = {
         object: getHandler(VIS, 'vis_object', ['id'])
     },
     get: getHandler(GET, 'get', ['id', 'type']),
-    put: putHandler,
+    post: postHandler,
+    remove: deleteHandler,
     del: {}
 };
