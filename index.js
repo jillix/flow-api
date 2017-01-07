@@ -64,17 +64,31 @@ function postHandler (scope, state, args, data, next) {
         connect(state, scope.env.db);
     }
 
-    let count = 0;
+    let count = 1;
     const errors = [];
     const success = [];
+    const done = () => {
+        data.body = {
+            success: success,
+            errors: errors
+        };
+
+        next(null, data);
+    };
 
     // parse request
     data.req.on('data', req => {
+        ++count
         POST(state.client, req, (err, res) => {
+
             if (err) {
                 errors.push(err);
             } else {
                 success.push(res);
+            }
+
+            if (--count === 0) {
+                done();
             }
         });
     });
@@ -83,13 +97,9 @@ function postHandler (scope, state, args, data, next) {
 
     // parse end
     data.req.on('end', () => {
-
-        data.body = {
-            success: success,
-            errors: errors
-        };
-
-        next(null, data);
+        if (--count === 0) {
+            done();
+        } 
     });
 }
 
