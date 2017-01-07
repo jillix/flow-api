@@ -64,9 +64,33 @@ function postHandler (scope, state, args, data, next) {
         connect(state, scope.env.db);
     }
 
-    data.req.on('data', req => POST(state.client, req));
-    data.body = {status: "ok"};
-    next(null, data);
+    let count = 0;
+    const errors = [];
+    const success = [];
+
+    // parse request
+    data.req.on('data', req => {
+        POST(state.client, req, (err, res) => {
+            if (err) {
+                errors.push(err);
+            } else {
+                success.push(res);
+            }
+        });
+    });
+
+    data.req.on('error', (err) => next(err));
+
+    // parse end
+    data.req.on('end', () => {
+
+        data.body = {
+            success: success,
+            errors: errors
+        };
+
+        next(null, data);
+    });
 }
 
 function deleteHandler (scope, state, args, data, next) {
