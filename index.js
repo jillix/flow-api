@@ -83,6 +83,11 @@ function postHandler (METHOD) {
             METHOD(state.client, req, (err, res) => {
 
                 if (err) {
+
+                    if (err instanceof Error) {
+                        err = err.message;
+                    }
+
                     errors.push(err);
                 } else {
                     success.push(res);
