@@ -57,50 +57,52 @@ function getHandler (Methods, fn, params) {
     }
 } 
 
-function postHandler (scope, state, args, data, next) {
+function postHandler (METHOD) {
+    return (scope, state, args, data, next) => {
 
-    // create db client for state
-    if (!state.client) {
-        connect(state, scope.env.db);
-    }
+        // create db client for state
+        if (!state.client) {
+            connect(state, scope.env.db);
+        }
 
-    let count = 1;
-    const errors = [];
-    const success = [];
-    const done = () => {
-        data.body = {
-            success: success,
-            errors: errors
+        let count = 1;
+        const errors = [];
+        const success = [];
+        const done = () => {
+            data.body = {
+                success: success,
+                errors: errors
+            };
+
+            next(null, data);
         };
 
-        next(null, data);
-    };
+        // parse request
+        data.req.on('data', req => {
+            ++count
+            METHOD(state.client, req, (err, res) => {
 
-    // parse request
-    data.req.on('data', req => {
-        ++count
-        POST(state.client, req, (err, res) => {
+                if (err) {
+                    errors.push(err);
+                } else {
+                    success.push(res);
+                }
 
-            if (err) {
-                errors.push(err);
-            } else {
-                success.push(res);
-            }
+                if (--count === 0) {
+                    done();
+                }
+            });
+        });
 
+        data.req.on('error', (err) => next(err));
+
+        // parse end
+        data.req.on('end', () => {
             if (--count === 0) {
                 done();
-            }
+            } 
         });
-    });
-
-    data.req.on('error', (err) => next(err));
-
-    // parse end
-    data.req.on('end', () => {
-        if (--count === 0) {
-            done();
-        } 
-    });
+    };
 }
 
 function deleteHandler (scope, state, args, data, next) {
@@ -129,7 +131,6 @@ module.exports = {
         object: getHandler(VIS, 'vis_object', ['id'])
     },
     get: getHandler(GET, 'get', ['id', 'type']),
-    post: postHandler,
-    remove: deleteHandler,
-    del: {}
+    save: postHandler(POST),
+    remove: postHandler(DELETE)
 };
