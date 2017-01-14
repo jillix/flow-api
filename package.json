@@ -3,6 +3,7 @@
   "version": "1.26.0",
   "description": "The flow api library and CLI app.",
   "main": "index.js",
+  "flow": "flow.js",
   "scripts": {
     "test": "node test"
   },
@@ -26,7 +27,8 @@
   },
   "dependencies": {
     "cayley": "github:adioo/cayley.js#stream-interface",
-    "schema": "github:jillix/schema"
+    "schema": "github:jillix/schema",
+    "stream-combiner": "^0.2.2"
   },
   "devDependencies": {}
 }
