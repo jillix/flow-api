@@ -1,73 +1,140 @@
 "use strict"
 
-const FLOW = require('./lib/request_flow');
-const VIS = require('./lib/request_vis');
-const GET = require('./lib/request_get');
 const POST = require('./lib/request_post');
 const DELETE = require('./lib/request_delete');
 const Store = require('./lib/store');
-const utils = require('./lib/utils');
 
-function getHandler (Methods, fn, params) {
+// TODO integrity and access
+function validate () {}
 
-    if (typeof Methods[fn] !== 'function') {
-        throw new Error('Flow-api.cayley: Method "' + fn + '" doesn\' exists.');
+function getStore(state, env) {
+
+    // create store instance on state
+    if (!state.store) {
+        // TODO handle errors
+        state.store = Store(env.FlowApiStore);
     }
 
-    return (scope, state, args, data, next) => { 
-
-        // create store instance on state
-        if (!state.store) {
-            // TODO handle errors
-            state.store = Store(scope.env.FlowApiStore);
-        }
-
-        let query_args = [state.store];
-        for (let i = 0, l = params.length; i < l; ++i) {
-
-            if (typeof data[params[i]] === 'undefined') {
-                return next(new Error('Flow-api.get.' + fn  + ': Missing parameter "' + params[i]  + '".'));
-            }
-
-            query_args.push(data[params[i]]);
-        };
-
-        query_args.push(!data.session || !data.session.role ? scope.env.role : data.session.role);
-
-        data.readable = Methods[fn].apply(null, query_args);
-        data.readable.pause();
-        data.resume = data.readable;
-
-        next(null, data);
-    }
-} 
-
-function postHandler (METHOD) {
-    return (scope, state, args, data, next) => {
-
-        // create store instance on state
-        if (!state.store) {
-            state.store = Store(scope.env.FlowApiStore);
-        }
-
-        data.readable = req.pipe(METHOD(state.store));
-        next(null, data);
-    };
+    return state.store;
 }
 
-// export API methods
-module.exports = {
-    utils: utils,
-    flow: getHandler(FLOW, 'flow', ['id']),
-    vis: {
-        networks: getHandler(VIS, 'networks', ['id']),
-        entrypoints: getHandler(VIS, 'outNodeNames', ['id']),
-        entrypoint: getHandler(VIS, 'outNodeNames', ['id']),
-        sequence: getHandler(VIS, 'outNodeNames', ['id']),
-        handler: getHandler(VIS, 'handler', ['id']),
-        object: getHandler(VIS, 'getObject', ['id'])
-    },
-    get: getHandler(GET, 'get', ['id', 'type']),
-    save: postHandler(POST),
-    remove: postHandler(DELETE)
+exports._networks = (scope, state, args, data, next) => { 
+
+    // export validation and implement it with flow
+    const err = validate('networks', data.id);
+    if (err) {
+        return next(err);
+    }
+
+    data.readable = getStore(state, scope.env).networks(data.id);
+    data.readable.pause();
+    data.resume = data.readable;
+
+    next(null, data);
+};
+
+exports._handler = (scope, state, args, data, next) => { 
+
+    // export validation and implement it with flow
+    const err = validate('handler', data.id);
+    if (err) {
+        return next(err);
+    }
+
+    data.readable = getStore(state, scope.env).outNodeNamesFn(data.id);
+    data.readable.pause();
+    data.resume = data.readable;
+
+    next(null, data);
+};
+
+exports.seq = (scope, state, args, data, next) => { 
+
+    const role = !data.session || !data.session.role ? scope.env.role : data.session.role;
+
+    // export validation and implement it with flow
+    const err = validate('sequence', data.id, role);
+    if (err) {
+        return next(err);
+    }
+
+    data.readable = getStore(state, scope.env).sequence(data.id, role);
+    data.readable.pause();
+    data.resume = data.readable;
+
+    next(null, data);
+};
+
+exports.out = (scope, state, args, data, next) => { 
+
+    // export validation and implement it with flow
+    const err = validate('out', data.id);
+    if (err) {
+        return next(err);
+    }
+
+    data.readable = getStore(state, scope.env).outNodeNames(data.id);
+    data.readable.pause();
+    data.resume = data.readable;
+
+    next(null, data);
+};
+
+exports.obj = (scope, state, args, data, next) => { 
+
+    // export validation and implement it with flow
+    const err = validate('object', data.id);
+    if (err) {
+        return next(err);
+    }
+
+    data.readable = getStore(state, scope.env).getObject(data.id);
+    data.readable.pause();
+    data.resume = data.readable;
+
+    next(null, data);
+};
+
+exports.add = (scope, state, args, data, next) => {
+
+    // create store instance on state
+    if (!state.store) {
+        state.store = Store(scope.env.FlowApiStore);
+    }
+
+    //data.readable = req.pipe(POST(state.store));
+    next(null, data);
+};
+
+exports.set = (scope, state, args, data, next) => {
+
+    // create store instance on state
+    if (!state.store) {
+        state.store = Store(scope.env.FlowApiStore);
+    }
+
+    //data.readable = req.pipe(POST(state.store));
+    next(null, data);
+};
+
+exports.rmn = (scope, state, args, data, next) => {
+
+    // create store instance on state
+    if (!state.store) {
+        state.store = Store(scope.env.FlowApiStore);
+    }
+
+    //data.readable = req.pipe(DELETE(state.store));
+    next(null, data);
+};
+
+exports.rme = (scope, state, args, data, next) => {
+
+    // create store instance on state
+    if (!state.store) {
+        state.store = Store(scope.env.FlowApiStore);
+    }
+
+    //data.readable = req.pipe(DELETE(state.store));
+    next(null, data);
 };
