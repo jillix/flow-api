@@ -19,7 +19,7 @@ function getStore(state, env) {
 }
 
 exports._networks = (scope, state, args, data, next) => { 
-
+console.log('Flow-API._networks:', data.id);
     // export validation and implement it with flow
     const err = validate('networks', data.id);
     if (err) {
@@ -33,23 +33,8 @@ exports._networks = (scope, state, args, data, next) => {
     next(null, data);
 };
 
-exports._handler = (scope, state, args, data, next) => { 
-
-    // export validation and implement it with flow
-    const err = validate('handler', data.id);
-    if (err) {
-        return next(err);
-    }
-
-    data.readable = getStore(state, scope.env).outNodeNamesFn(data.id);
-    data.readable.pause();
-    data.resume = data.readable;
-
-    next(null, data);
-};
-
 exports.seq = (scope, state, args, data, next) => { 
-
+console.log('Flow-API.seq:', data.id);
     const role = !data.session || !data.session.role ? scope.env.role : data.session.role;
 
     // export validation and implement it with flow
@@ -65,15 +50,15 @@ exports.seq = (scope, state, args, data, next) => {
     next(null, data);
 };
 
-exports.out = (scope, state, args, data, next) => { 
-
+exports.outNodes = (scope, state, args, data, next) => { 
+console.log('Flow-API.out:', data.id);
     // export validation and implement it with flow
     const err = validate('out', data.id);
     if (err) {
         return next(err);
     }
 
-    data.readable = getStore(state, scope.env).outNodeNames(data.id);
+    data.readable = getStore(state, scope.env).outNodes(data.id);
     data.readable.pause();
     data.resume = data.readable;
 
@@ -81,7 +66,7 @@ exports.out = (scope, state, args, data, next) => {
 };
 
 exports.obj = (scope, state, args, data, next) => { 
-
+console.log('Flow-API.obj:', data.id);
     // export validation and implement it with flow
     const err = validate('object', data.id);
     if (err) {
@@ -96,45 +81,53 @@ exports.obj = (scope, state, args, data, next) => {
 };
 
 exports.add = (scope, state, args, data, next) => {
-
+console.log('Flow-API.seq:', data.id);
     // create store instance on state
     if (!state.store) {
         state.store = Store(scope.env.FlowApiStore);
     }
 
-    //data.readable = req.pipe(POST(state.store));
+    //data.readable = getStore(state, scope.env);
+    //data.readable.pause();
+    //data.resume = data.readable;
     next(null, data);
 };
 
 exports.set = (scope, state, args, data, next) => {
-
+console.log('Flow-API.set:', data.id);
     // create store instance on state
     if (!state.store) {
         state.store = Store(scope.env.FlowApiStore);
     }
 
     //data.readable = req.pipe(POST(state.store));
+    //data.readable.pause();
+    //data.resume = data.readable;
     next(null, data);
 };
 
 exports.rmn = (scope, state, args, data, next) => {
-
+console.log('Flow-API.rmn:', data.id);
     // create store instance on state
     if (!state.store) {
         state.store = Store(scope.env.FlowApiStore);
     }
 
-    //data.readable = req.pipe(DELETE(state.store));
+    //data.readable = getStore(state, scope.env);
+    //data.readable.pause();
+    //data.resume = data.readable;
     next(null, data);
 };
 
 exports.rme = (scope, state, args, data, next) => {
-
+console.log('Flow-API.rme:', data.id);
     // create store instance on state
     if (!state.store) {
         state.store = Store(scope.env.FlowApiStore);
     }
 
-    //data.readable = req.pipe(DELETE(state.store));
+    //data.readable = getStore(state, scope.env);
+    //data.readable.pause();
+    //data.resume = data.readable;
     next(null, data);
 };
