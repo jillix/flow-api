@@ -1,133 +1,97 @@
 # flow-api
 
-Environment (`scope.env`)
-```json
-{
-    "FlowApiStore": {/*Store config*/}
-}
-```
-
-Result (`data`)
+#### Environment
 ```js
-{
-    "readable": ReadableObjectStream()
-}
+scope.env.FlowApiStore = {/*Store config*/};
 ```
 
-### Public Methods
-#####sequence
-Data
-```json
-{
-    "id": "nodeId",
-    "role": "roleId"
-}
+#### Result
+```js
+data.readable = ReadableObjectStream();
 ```
 
-#####getOutNodes
-Data
-```json
-{
-    "from": "nodeId",
-    "out": ["predicate"]
-}
+## Public Methods
+#### sequence
+```js
+data.id = "nodeId";
+data.role = "roleId";
 ```
-#####getNodeData
-Data
-```json
-{
-    "node": "nodeId"
-}
+#### getOutNodes
+```js
+data.from = "nodeId";
+data.out = ["predicate"];
 ```
-#####getNodeName
-Data
-```json
-{
-    "node": "nodeId"
-}
+#### getNodeData
+```js
+data.node = "nodeId";
 ```
-#####setNodeData
-Data
-```json
-{
-    "id": "nodeId",
-    "data": {}
-}
+#### getNodeName
+```js
+data.node = "nodeId";
 ```
-#####setNodeName
-Data
-```json
-{
-    "id": "nodeId"
-    "name": "Node Name!@#"
-}
+#### setNodeData
+```js
+data.id = "nodeId";
+data.data = {};
 ```
-#####addOutNode
-Data
-```json
-{
-    "add": "FromNodeId",
-    "out": "predicate",
-    "node": "ToNodeId"
-}
+#### setNodeName
+```js
+data.id = "nodeId";
+data.name = "Node Name!@#";
 ```
-#####addOutCreate
-Data
-```json
-{
-    "add": "FromNodeId",
-    "out": "predicate",
-    "create": {
-        "name": "Node name!#@",
-        "data": {}
-    }
-}
+#### addOutNode
+```js
+data.add = "FromNodeId";
+data.out = "predicate";
+data.node = "ToNodeId";
 ```
-#####setOutNode
-Data
-```json
-{
-    "set": "FromNodeId",
-    "out": "predicate",
-    "node": "ToNodeId"
-}
+#### addOutCreate
+```js
+data.add = "FromNodeId";
+data.out = "predicate";
+data.create = {
+    name: "Node name!#@",
+    data: {}
+};
 ```
-#####setOutCreate
-Data
-```json
-{
-    "set": "FromNodeId",
-    "out": "predicate",
-    "create": {
-        "name": "Node name!#@",
-        "data": {}
-    }
-}
+#### setOutNode
+```js
+data.set = "FromNodeId";
+data.out = "predicate";
+data.node = "ToNodeId";
 ```
-#####removeNode
-Data
-```json
-{
-    "node": "nodeId"
-}
+#### setOutCreate
+```js
+data.set = "FromNodeId";
+data.out = "predicate";
+data.create = {
+    name: "Node name!#@",
+    data: {}
+};
 ```
-#####removeOut
-Data
-```json
-{
-    "node": "nodeId",
-    "out": ["predicate"]
-}
+#### removeNode
+```js
+data.node = "nodeId";
 ```
-/search/type/[string]
-/search/out/[string]
-
+#### removeOut
+```js
+data.node = "nodeId";
+data.out = ["predicate"];
+```
+#### search
+```js
+data.query = "Search query";
+data.filters = {
+    type: "nodeType",
+    start: "nodeId"
+};
+```
 ## Store API
-sequence
-entrypoint
-outNodes
-getObject
-incomming
-outgoing
-remove
-write
+- sequence
+- entrypoint
+- outNodes
+- getObject
+- incomming
+- outgoing
+- remove
+- write
