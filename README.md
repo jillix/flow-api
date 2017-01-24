@@ -87,11 +87,27 @@ data.filters = {
 };
 ```
 ## Store API
-- sequence
-- entrypoint
-- outNodes
-- getObject
-- incomming
-- outgoing
-- remove
-- write
+#### sequence
+* *NodeId*
+* *roleId*
+
+#### entrypoint
+* *NodeName*
+
+#### outNodes
+* *NodeId*
+
+#### getObject
+* *NodeId*
+
+#### incomming
+* *NodeId*
+
+#### outgoing
+* *NodeId*
+
+#### remove
+* *triples*: Array of triples to delete.
+
+#### write
+* *triples*: Array of triples to write.
