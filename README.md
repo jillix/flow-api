@@ -13,7 +13,7 @@ data.readable = ReadableObjectStream();
 ## Public Methods
 #### sequence
 ```js
-data.id = "nodeId";
+data.node = "nodeId";
 data.role = "roleId";
 ```
 #### getOutNodes
@@ -31,12 +31,12 @@ data.node = "nodeId";
 ```
 #### setNodeData
 ```js
-data.id = "nodeId";
+data.node = "nodeId";
 data.data = {};
 ```
 #### setNodeName
 ```js
-data.id = "nodeId";
+data.node = "nodeId";
 data.name = "Node Name!@#";
 ```
 #### addOutNode
