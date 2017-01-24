@@ -1,4 +1,4 @@
-# flow-api
+# Flow API
 
 #### Environment
 ```js
