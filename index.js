@@ -19,69 +19,69 @@ function getStore(state, env) {
 }
 
 exports._networks = (scope, state, args, data, next) => { 
-console.log('Flow-API._networks:', data.id);
+console.log('Flow-API._networks:', data.user);
     // export validation and implement it with flow
-    const err = validate('networks', data.id);
+    const err = validate('networks', data.user);
     if (err) {
         return next(err);
     }
 
-    data.readable = getStore(state, scope.env).networks(data.id);
+    data.readable = getStore(state, scope.env).networks(data.user);
     data.readable.pause();
     data.resume = data.readable;
 
     next(null, data);
 };
 
-exports.seq = (scope, state, args, data, next) => { 
-console.log('Flow-API.seq:', data.id);
-    const role = !data.session || !data.session.role ? scope.env.role : data.session.role;
+exports.sequence = (scope, state, args, data, next) => { 
+console.log('Flow-API.sequence:', data.node, data.role);
 
     // export validation and implement it with flow
-    const err = validate('sequence', data.id, role);
+    const err = validate('sequence', data.id, data.role);
     if (err) {
         return next(err);
     }
 
-    data.readable = getStore(state, scope.env).sequence(data.id, role);
+    data.readable = getStore(state, scope.env).sequence(data.id, data.role);
     data.readable.pause();
     data.resume = data.readable;
 
     next(null, data);
 };
 
-exports.outNodes = (scope, state, args, data, next) => { 
-console.log('Flow-API.out:', data.id);
+exports.getOutNodes = (scope, state, args, data, next) => { 
+console.log('Flow-API.getOutNodes:', data.node, data.out);
     // export validation and implement it with flow
-    const err = validate('out', data.id);
+    const err = validate('getOutNodes', data.node);
     if (err) {
         return next(err);
     }
 
-    data.readable = getStore(state, scope.env).outNodes(data.id);
+    data.readable = getStore(state, scope.env).outNodes(data.node, data.out);
     data.readable.pause();
     data.resume = data.readable;
 
     next(null, data);
 };
 
-exports.obj = (scope, state, args, data, next) => { 
-console.log('Flow-API.obj:', data.id);
+exports.getNodeData = (scope, state, args, data, next) => { 
+console.log('Flow-API.getNodeData:', data.node);
     // export validation and implement it with flow
-    const err = validate('object', data.id);
+    const err = validate('getNodeData', data.node);
     if (err) {
         return next(err);
     }
 
-    data.readable = getStore(state, scope.env).getObject(data.id);
+    data.readable = getStore(state, scope.env).getObject(data.node);
     data.readable.pause();
     data.resume = data.readable;
 
     next(null, data);
 };
+// TODO does a "getNodeName" method makes sense?
 
-exports.add = (scope, state, args, data, next) => {
-console.log('Flow-API.seq:', data.id);
+exports.setNodeData = (scope, state, args, data, next) => {
+console.log('Flow-API.setNodeData:', data.node);
     // create store instance on state
     if (!state.store) {
         state.store = Store(scope.env.FlowApiStore);
@@ -92,9 +92,10 @@ console.log('Flow-API.seq:', data.id);
     //data.resume = data.readable;
     next(null, data);
 };
+// TODO does a "setNodeName" method makes sense?
 
-exports.set = (scope, state, args, data, next) => {
-console.log('Flow-API.set:', data.id);
+exports.addOutNode = (scope, state, args, data, next) => {
+console.log('Flow-API.addOutNode:', data.add, data.out, data.node);
     // create store instance on state
     if (!state.store) {
         state.store = Store(scope.env.FlowApiStore);
@@ -106,8 +107,8 @@ console.log('Flow-API.set:', data.id);
     next(null, data);
 };
 
-exports.rmn = (scope, state, args, data, next) => {
-console.log('Flow-API.rmn:', data.id);
+exports.addOutCreate = (scope, state, args, data, next) => {
+console.log('Flow-API.addOutCreate:', data.add, data.out, data.create);
     // create store instance on state
     if (!state.store) {
         state.store = Store(scope.env.FlowApiStore);
@@ -119,8 +120,47 @@ console.log('Flow-API.rmn:', data.id);
     next(null, data);
 };
 
-exports.rme = (scope, state, args, data, next) => {
-console.log('Flow-API.rme:', data.id);
+exports.setOutNode = (scope, state, args, data, next) => {
+console.log('Flow-API.setOutNode:', data.set, data.out, data.node);
+    // create store instance on state
+    if (!state.store) {
+        state.store = Store(scope.env.FlowApiStore);
+    }
+
+    //data.readable = getStore(state, scope.env);
+    //data.readable.pause();
+    //data.resume = data.readable;
+    next(null, data);
+};
+
+exports.setOutCreate = (scope, state, args, data, next) => {
+console.log('Flow-API.setOutCreate:', data.set, data.out, data.create);
+    // create store instance on state
+    if (!state.store) {
+        state.store = Store(scope.env.FlowApiStore);
+    }
+
+    //data.readable = getStore(state, scope.env);
+    //data.readable.pause();
+    //data.resume = data.readable;
+    next(null, data);
+};
+
+exports.removeNode = (scope, state, args, data, next) => {
+console.log('Flow-API.removeNode:', data.node);
+    // create store instance on state
+    if (!state.store) {
+        state.store = Store(scope.env.FlowApiStore);
+    }
+
+    //data.readable = getStore(state, scope.env);
+    //data.readable.pause();
+    //data.resume = data.readable;
+    next(null, data);
+};
+
+exports.removeOut = (scope, state, args, data, next) => {
+console.log('Flow-API.removeOut:', data.node, data.out);
     // create store instance on state
     if (!state.store) {
         state.store = Store(scope.env.FlowApiStore);
