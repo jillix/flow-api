@@ -29,7 +29,7 @@ exports.getOutNodes = (store, node, out) => {
         return new Error('Flow-api.getOutNodes: Invalid node id.');
     }
 
-    if (!validate.edge('get', out)) {
+    if (!validate.getEdge(out)) {
         return new Error('Flow-api.getOutNodes: Invalid predicate.');
     }
 
@@ -60,7 +60,7 @@ exports.setNodeData = (store, node, data) => {
         return new Error('Flow-api.setNodeData: Invalid node id.');
     }
 
-    if (!validate.data('set', data)) {
+    if (!validate.data(data)) {
         return new Error('Flow-api.setNodeData: Invalid data.');
     }
 
@@ -86,7 +86,7 @@ exports.addOutNode = (store, add, out, node) => {
         return new Error('Flow-api.addOutNode: Invalid node id.');
     }
 
-    if (!validate.edge('add', out)) {
+    if (!validate.addEdge(out)) {
         return new Error('Flow-api.addOutNode: Invalid predicate.');
     }
 
@@ -99,11 +99,11 @@ exports.addOutCreate = (store, add, out, node) => {
         return new Error('Flow-api.addOutCreate: Invalid node id.');
     }
 
-    if (!validate.edge('add', out)) {
+    if (!validate.addEdge(out)) {
         return new Error('Flow-api.addOutCreate: Invalid predicate.');
     }
 
-    if (!validate.data('add', node)) {
+    if (!validate.data(node)) {
         return new Error('Flow-api.addOutCreate: Invalid data.');
     }
 
@@ -116,7 +116,7 @@ exports.setOutNode = (store, set, out, node) => {
         return new Error('Flow-api.setOutNode: Invalid node id.');
     }
 
-    if (!validate.edge('set', out)) {
+    if (!validate.setEdge(out)) {
         return new Error('Flow-api.setOutNode: Invalid predicate.');
     }
 
@@ -129,11 +129,11 @@ exports.setOutCreate = (store, set, out, node) => {
         return new Error('Flow-api.setOutCreate: Invalid node id.');
     }
 
-    if (!validate.edge('set', out)) {
+    if (!validate.setEdge(out)) {
         return new Error('Flow-api.setOutCreate: Invalid predicate.');
     }
 
-    if (!validate.data('set', node)) {
+    if (!validate.data(node)) {
         return new Error('Flow-api.setOutCreate: Invalid data.');
     }
 
@@ -155,7 +155,7 @@ exports.removeOut = (store, node, out) => {
         return new Error('Flow-api.removeOut: Invalid node id.');
     }
 
-    if (!validate.edge('del', out)) {
+    if (!validate.delEdge(out)) {
         return new Error('Flow-api.removeOut: Invalid predicate.');
     }
 
