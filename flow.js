@@ -137,3 +137,11 @@ exports.removeOut = (scope, state, args, data, next) => {
         data.out,
     ], next, handleResult(data, next));
 };
+
+exports.search = (scope, state, args, data, next) => {
+    data.body = [
+        ["_:9801187750764b9d6f1388ef3a060e79","<http://schema.jillix.net/vocab/Network>","Service"],
+        ["_:b56c8738cfe158fe9b0b7a92777e468f", "<http://schema.jillix.net/vocab/Sequence>", "CLIENT_INIT"]
+    ];
+    return next(null, data);
+};
