@@ -4,6 +4,10 @@ const remove = require('./lib/remove');
 const create = require('./lib/create');
 const update = require('./lib/update');
 const validate = require('./lib/validation');
+const converter = require('./lib/converter');
+
+exports.toRDF = converter.toRDF;
+exports.toJSON = converter.toJSON;
 
 exports._networks = (store, user) => {
 
