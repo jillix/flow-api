@@ -1,141 +1,163 @@
-// Dependencies
-//const modules = require('./lib/modules');
-//const instances = require('./lib/instances');
-//const events = require('./lib/events');
-const cayley = require('cayley');
-const Adapter = require('./lib/cayley_adapter');
-const VIS = require('./lib/cayley_vis');
-const GET = require('./lib/cayley_get');
-const POST = require('./lib/cayley_post');
-const DELETE = require('./lib/cayley_delete');
-const utils = require('./lib/utils');
+"use strict"
 
-function connect (state, db) {
-    state.client = cayley(db);
-    state.g = state.client.graph;
-}
+const remove = require('./lib/remove');
+const create = require('./lib/create');
+const update = require('./lib/update');
+const validate = require('./lib/validation');
 
-function getHandler (Methods, fn, params) {
+exports._networks = (store, user) => {
 
-    if (typeof Methods[fn] !== 'function') {
-        throw new Error('Flow-api.cayley: Method "' + fn + '" doesn\' exists.');
+    if (!validate.blankNode(user)) {
+        return new Error('Flow-api._networks: Invalid node id.');
     }
 
-    return (scope, state, args, data, next) => { 
+    return store.networks(user);
+};
 
-        // create db client for state
-        if (!state.client) {
-            connect(state, scope.env.db);
-        }
+exports.sequence = (store, node, role) => {
 
-        let query_args = [state.g];
-        for (let i = 0, l = params.length; i < l; ++i) {
-
-            if (typeof data[params[i]] === 'undefined') {
-                return next(new Error('Flow-api.get.' + fn  + ': Missing parameter "' + params[i]  + '".'));
-            }
-
-            query_args.push(data[params[i]]);
-        };
-
-        query_args.push(!data.session || !data.session.role ? scope.env.role : data.session.role);
-
-        data.readable = Methods[fn].apply(null, query_args);
-
-        try {
-            if (data.readable instanceof Array) {
-                data.readable.forEach(stream => stream.pause());
-            } else {
-                data.readable.pause();
-            }
-        } catch (err) {
-            return next(err);
-        }
-
-        data.resume = data.readable;
-        next(null, data);
-    }
-} 
-
-function postHandler (METHOD) {
-    return (scope, state, args, data, next) => {
-
-        // create db client for state
-        if (!state.client) {
-            connect(state, scope.env.db);
-        }
-
-        let count = 1;
-        const errors = [];
-        const success = [];
-        const done = () => {
-            data.body = {
-                success: success,
-                errors: errors
-            };
-
-            next(null, data);
-        };
-
-        // parse request
-        data.req.on('data', req => {
-            ++count
-            METHOD(state.client, req, (err, res) => {
-
-                if (err) {
-
-                    if (err instanceof Error) {
-                        err = err.message;
-                    }
-
-                    errors.push(err);
-                } else {
-                    success.push(res);
-                }
-
-                if (--count === 0) {
-                    done();
-                }
-            });
-        });
-
-        data.req.on('error', (err) => next(err));
-
-        // parse end
-        data.req.on('end', () => {
-            if (--count === 0) {
-                done();
-            } 
-        });
-    };
-}
-
-function deleteHandler (scope, state, args, data, next) {
-
-    // create db client for state
-    if (!state.client) {
-        connect(state, scope.env.db);
+    if (!validate.blankNode([node, role])) {
+        return new Error('Flow-api.sequence: Invalid node id.');
     }
 
-    DELETE(state.client, data.req.url);
-    data.body = {status: "ok"};
-    next(null, data);
-}
+    return store.sequence(node, role);
+};
 
-// export API methods
-module.exports = {
-    _connect: connect,
-    utils: utils,
-    flow: getHandler(Adapter, 'flow', ['id']),
-    vis: {
-        networks: getHandler(VIS, 'vis_networks', ['id']),
-        entrypoints: getHandler(VIS, 'vis_entrypoints', ['id']),
-        entrypoint: getHandler(VIS, 'vis_entrypoint', ['id']),
-        sequence: getHandler(VIS, 'vis_sequence', ['id']),
-        handler: getHandler(VIS, 'vis_handler', ['id']),
-        object: getHandler(VIS, 'vis_object', ['id'])
-    },
-    get: getHandler(GET, 'get', ['id', 'type']),
-    save: postHandler(POST),
-    remove: postHandler(DELETE)
+exports.getOutNodes = (store, node, out) => { 
+
+    if (!validate.blankNode(node)) {
+        return new Error('Flow-api.getOutNodes: Invalid node id.');
+    }
+
+    if (!validate.getEdge(out)) {
+        return new Error('Flow-api.getOutNodes: Invalid predicate.');
+    }
+
+    return store.outNodes(node, out);
+};
+
+exports.getNodeData = (store, node) => { 
+
+    if (!validate.blankNode(node)) {
+        return new Error('Flow-api.getNodeData: Invalid node id.');
+    }
+
+    return store.getObject(node);
+};
+
+exports.getNodeName = (store, node) => { 
+
+    if (!validate.blankNode(node)) {
+        return new Error('Flow-api.getOutNodes: Invalid node id.');
+    }
+
+    return store.getName(node);
+};
+
+exports.setNodeData = (store, node, data) => {
+
+    if (!validate.blankNode(node)) {
+        return new Error('Flow-api.setNodeData: Invalid node id.');
+    }
+
+    if (!validate.data(data)) {
+        return new Error('Flow-api.setNodeData: Invalid data.');
+    }
+
+    return update.data(store, node, data);
+};
+
+exports.setNodeName = (store, node, name) => { 
+
+    if (!validate.blankNode(node)) {
+        return new Error('Flow-api.setNodeName: Invalid node id.');
+    }
+
+    if (!validate.name('set', name)) {
+        return new Error('Flow-api.setNodeName: Invalid name.');
+    }
+
+    return update.name(store, node, name);
+};
+
+exports.addOutNode = (store, add, out, node) => {
+
+    if (!validate.blankNode([add, node])) {
+        return new Error('Flow-api.addOutNode: Invalid node id.');
+    }
+
+    if (!validate.addEdge(out)) {
+        return new Error('Flow-api.addOutNode: Invalid predicate.');
+    }
+
+    return create.out(store, add, out, node);
+};
+
+exports.addOutCreate = (store, add, out, node) => {
+
+    if (!validate.blankNode(add)) {
+        return new Error('Flow-api.addOutCreate: Invalid node id.');
+    }
+
+    if (!validate.addEdge(out)) {
+        return new Error('Flow-api.addOutCreate: Invalid predicate.');
+    }
+
+    if (!validate.data(node)) {
+        return new Error('Flow-api.addOutCreate: Invalid data.');
+    }
+
+    return create.out(store, add, out, create.node(node));
+};
+
+exports.setOutNode = (store, set, out, node) => {
+
+    if (!validate.blankNode([set, node])) {
+        return new Error('Flow-api.setOutNode: Invalid node id.');
+    }
+
+    if (!validate.setEdge(out)) {
+        return new Error('Flow-api.setOutNode: Invalid predicate.');
+    }
+
+    update.out(store, set, out, node);
+};
+
+exports.setOutCreate = (store, set, out, node) => {
+
+    if (!validate.blankNode(set)) {
+        return new Error('Flow-api.setOutCreate: Invalid node id.');
+    }
+
+    if (!validate.setEdge(out)) {
+        return new Error('Flow-api.setOutCreate: Invalid predicate.');
+    }
+
+    if (!validate.data(node)) {
+        return new Error('Flow-api.setOutCreate: Invalid data.');
+    }
+
+    update.out(store, set, out, create.node(node));
+};
+
+exports.removeNode = (store, node) => {
+
+    if (!validate.blankNode(node)) {
+        return new Error('Flow-api.removeNode: Invalid node id.');
+    }
+
+    return remove.node(store, node);
+};
+
+exports.removeOut = (store, node, out) => {
+
+    if (!validate.blankNode(node)) {
+        return new Error('Flow-api.removeOut: Invalid node id.');
+    }
+
+    if (!validate.delEdge(out)) {
+        return new Error('Flow-api.removeOut: Invalid predicate.');
+    }
+
+    return remove.out(store, node, out);
 };
