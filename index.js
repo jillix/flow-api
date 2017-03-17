@@ -4,10 +4,11 @@ const remove = require('./lib/remove');
 const create = require('./lib/create');
 const update = require('./lib/update');
 const validate = require('./lib/validation');
-const converter = require('./lib/converter');
+const importer = require('./lib/import');
+const exporter= require('./lib/export');
 
-exports.toRDF = converter.toRDF;
-exports.toJSON = converter.toJSON;
+exports.toRDF = importer.toRDF;
+exports.toJSON = exporter.toJSON;
 
 exports._networks = (store, user) => {
 
