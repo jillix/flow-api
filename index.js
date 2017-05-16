@@ -10,14 +10,7 @@ const exporter= require('./lib/export');
 exports.toRDF = importer.toRDF;
 exports.toJSON = exporter.toJSON;
 
-exports._networks = (store, user) => {
-
-    if (!validate.blankNode(user)) {
-        return new Error('Flow-api._networks: Invalid node id.');
-    }
-
-    return store.networks(user);
-};
+exports.search = () => {};
 
 exports.sequence = (store, node, role) => {
 
@@ -28,7 +21,7 @@ exports.sequence = (store, node, role) => {
     return store.sequence(node, role);
 };
 
-exports.getOutNodes = (store, node, out) => { 
+exports.getOutNodes = (store, node, out) => {
 
     if (!validate.blankNode(node)) {
         return new Error('Flow-api.getOutNodes: Invalid node id.');
@@ -41,7 +34,7 @@ exports.getOutNodes = (store, node, out) => {
     return store.outNodes(node, out);
 };
 
-exports.getNodeData = (store, node) => { 
+exports.getNodeData = (store, node) => {
 
     if (!validate.blankNode(node)) {
         return new Error('Flow-api.getNodeData: Invalid node id.');
@@ -50,7 +43,7 @@ exports.getNodeData = (store, node) => {
     return store.getObject(node);
 };
 
-exports.getNodeName = (store, node) => { 
+exports.getNodeName = (store, node) => {
 
     if (!validate.blankNode(node)) {
         return new Error('Flow-api.getOutNodes: Invalid node id.');
@@ -72,7 +65,7 @@ exports.setNodeData = (store, node, data) => {
     return update.data(store, node, data);
 };
 
-exports.setNodeName = (store, node, name) => { 
+exports.setNodeName = (store, node, name) => {
 
     if (!validate.blankNode(node)) {
         return new Error('Flow-api.setNodeName: Invalid node id.');
