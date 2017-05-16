@@ -4,6 +4,11 @@ const remove = require('./lib/remove');
 const create = require('./lib/create');
 const update = require('./lib/update');
 const validate = require('./lib/validation');
+const importer = require('./lib/import');
+const exporter= require('./lib/export');
+
+exports.toRDF = importer.toRDF;
+exports.toJSON = exporter.toJSON;
 
 exports.search = () => {};
 
